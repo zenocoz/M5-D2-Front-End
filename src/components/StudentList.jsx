@@ -1,5 +1,5 @@
 import React from "react"
-import {Table, Button} from "react-bootstrap"
+import { Table, Button } from "react-bootstrap"
 
 const StudentList = (props) => {
   const deleteStudent = async (id) => {
@@ -17,7 +17,6 @@ const StudentList = (props) => {
     }
   }
 
-  const updateStudent = async (id) => {}
   return (
     <Table striped bordered hover>
       <thead>
@@ -46,7 +45,7 @@ const StudentList = (props) => {
               <Button
                 className="ml-3"
                 variant="primary"
-                onClick={() => updateStudent(student.ID)}
+                onClick={() => props.handleModal(student.ID)}
               >
                 Update
               </Button>

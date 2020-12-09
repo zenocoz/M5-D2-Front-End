@@ -1,9 +1,10 @@
-import React, {Component} from "react"
-import {Container, Form, Row, Col, Button} from "react-bootstrap"
+import React, { Component } from "react"
+import { Container, Form, Row, Col, Button, Modal } from "react-bootstrap"
 
 export default class FormStudent extends Component {
   state = {
     student: {},
+    showModal: false,
   }
 
   handleChange = (e) => {
@@ -39,13 +40,13 @@ export default class FormStudent extends Component {
       const response = await fetch("http://localhost:3001/students", {
         method: "POST",
         body: JSON.stringify(this.state.student),
-        headers: new Headers({"Content-Type": "application/json"}),
+        headers: new Headers({ "Content-Type": "application/json" }),
       })
       if (response.ok) {
         alert("student submitted correctly")
         let success = await response.json()
         console.log(success)
-        this.setState({student: {}})
+        this.setState({ student: {} })
       } else {
         alert("something went wrong")
       }
@@ -62,6 +63,25 @@ export default class FormStudent extends Component {
         <h1>STUDENTS MANAGER</h1>
         <Row>
           <Col>
+            {this.state.showModal && (
+              <>
+                <Button variant="primary">Launch demo modal</Button>
+
+                <Modal>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Modal heading</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    Woohoo, you're reading this text in a modal!
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button>Close</Button>
+                    <Button>Save Changes</Button>
+                  </Modal.Footer>
+                </Modal>
+              </>
+            )}
+
             <Form onSubmit={this.handleSubmit}>
               <Form.Group>
                 <Form.Label>Name</Form.Label>
